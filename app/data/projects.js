@@ -1,29 +1,44 @@
 export const workData = [
   {
-    title: "AI Marketing Assistant",
-    description: "An intelligent marketing assistant powered by machine learning to optimize campaign performance and ROI.",
-    bgImage: "/images/placeholder.jpg",
-    fallbackImage: "/images/placeholder.jpg",
-    technologies: ["Python", "TensorFlow", "React", "AWS"],
-    demoLink: "https://demo-link-1.com",
-    codeLink: "https://github.com/yourusername/project1"
+    title: "Real-Time AI Healthcare Triage",
+    description: "Built a federated learning system for predicting patient deterioration in real-time using ICU sensor data. Implemented privacy-preserving ML across distributed hospital networks, reducing triage delays while maintaining HIPAA compliance.",
+    technologies: [
+      "TensorFlow Federated",
+      "PyTorch",
+      "Apache Kafka",
+      "AWS EC2",
+      "Grafana",
+      "SHAP"
+    ],
+    demoLink: "https://yourdemo.com/healthcare-triage",
+    codeLink: "https://github.com/yourusername/healthcare-triage"
   },
   {
-    title: "Data Visualization Platform",
-    description: "Interactive dashboard for real-time data analysis and visualization using modern web technologies.",
-    bgImage: "/images/placeholder.jpg",
-    fallbackImage: "/images/placeholder.jpg",
-    technologies: ["Next.js", "D3.js", "Node.js", "MongoDB"],
-    demoLink: "https://demo-link-2.com",
-    codeLink: "https://github.com/yourusername/project2"
+    title: "Generative AI Industrial Design",
+    description: "Developed a real-time 3D design generation tool using diffusion models and physics simulations. Enables rapid prototyping of mechanical and architectural designs with automated optimization for structural integrity.",
+    technologies: [
+      "Stable Diffusion",
+      "NVIDIA Omniverse",
+      "Three.js",
+      "WebGL",
+      "PyTorch",
+      "Bayesian Optimization"
+    ],
+    demoLink: "https://yourdemo.com/industrial-design",
+    codeLink: "https://github.com/yourusername/industrial-design"
   },
   {
-    title: "MLOps Pipeline",
-    description: "Automated machine learning pipeline for model training, deployment, and monitoring.",
-    bgImage: "/images/placeholder.jpg",
-    fallbackImage: "/images/placeholder.jpg",
-    technologies: ["Docker", "Kubernetes", "Python", "TensorFlow"],
-    demoLink: "https://demo-link-3.com",
-    codeLink: "https://github.com/yourusername/project3"
+    title: "F1 Race Analytics Platform",
+    description: "Created a real-time F1 race analytics system using computer vision and telemetry data fusion. Provides live insights on race strategy, tire degradation, and overtaking opportunities using edge AI deployment.",
+    technologies: [
+      "YOLOv8",
+      "MediaPipe",
+      "FastAPI",
+      "NVIDIA Jetson",
+      "AWS",
+      "Kafka"
+    ],
+    demoLink: "https://yourdemo.com/f1-analytics",
+    codeLink: "https://github.com/yourusername/f1-analytics"
   }
 ];
