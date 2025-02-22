@@ -23,7 +23,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="relative min-h-[100vh] flex items-center overflow-hidden pt-20">
+    <header id="header" className="relative min-h-[100vh] flex items-center overflow-hidden pt-20">
       {/* Animated Background */}
       <div className="absolute inset-0 w-full h-full">
         <motion.div 
@@ -45,7 +45,7 @@ const Header = () => {
           <motion.div
             className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full"
             style={{
-              background: isDarkMode
+              background: isDarkMode 
                 ? 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(0,0,0,0) 70%)'
                 : 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(255,255,255,0) 70%)',
               y: bgY
