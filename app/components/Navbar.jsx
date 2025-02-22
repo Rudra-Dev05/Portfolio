@@ -31,17 +31,6 @@ const Navbar = () => {
     exit: { y: -20, opacity: 0 }
   }
 
-  const handleMobileNavClick = (href) => {
-    setIsOpen(false)
-    const targetId = href.substring(1)
-    setTimeout(() => {
-      const targetElement = document.getElementById(targetId)
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 300) // Match the menu close animation duration
-  }
-
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled 
@@ -86,7 +75,7 @@ const Navbar = () => {
                     className="absolute bottom-0 left-0 w-full h-0.5 bg-violet-600 origin-left"
                     initial={{ scaleX: 0 }}
                     variants={{
-                      hover: { scaleX: 1 }}
+                      hover: { scaleX: 1 }
                     }}
                     transition={{ duration: 0.2 }}
                   />
@@ -175,10 +164,7 @@ const Navbar = () => {
                   className={`block py-3 text-lg font-medium ${
                     isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'
                   }`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleMobileNavClick(item.href)
-                  }}
+                  onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </motion.a>
