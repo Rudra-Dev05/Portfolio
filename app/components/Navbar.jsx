@@ -18,8 +18,22 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleClick = (e, href) => {
+    e.preventDefault()
+    setIsOpen(false) // Close mobile menu
+    
+    const element = document.querySelector(href)
+    if (element) {
+      const offsetTop = element.offsetTop
+      window.scrollTo({
+        top: offsetTop - 80, // Adjust for navbar height
+        behavior: 'smooth'
+      })
+    }
+  }
+
   const navItems = [
-    { name: 'Home', href: '#top' },
+    { name: 'Home', href: '#header' },  
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#work' },
     { name: 'Contact', href: '#contact' }
@@ -65,6 +79,7 @@ const Navbar = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
                   className={`relative px-4 py-2 text-sm font-medium ${
                     isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'
                   }`}
@@ -156,6 +171,7 @@ const Navbar = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => handleClick(e, item.href)}
                   variants={fadeInUp}
                   initial="initial"
                   animate="animate"
@@ -164,7 +180,6 @@ const Navbar = () => {
                   className={`block py-3 text-lg font-medium ${
                     isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-black'
                   }`}
-                  onClick={() => setIsOpen(false)}
                 >
                   {item.name}
                 </motion.a>
