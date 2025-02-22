@@ -1,6 +1,5 @@
 'use client'
 import React, { memo } from 'react'
-import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import { HiExternalLink, HiCode, HiLightningBolt } from 'react-icons/hi'
@@ -17,83 +16,60 @@ const Work = memo(() => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -8 }}
-      className={`group relative rounded-2xl overflow-hidden
+      className={`group relative rounded-2xl overflow-hidden p-6 space-y-4
         ${isDarkMode ? 'bg-white/5' : 'bg-white'}
         border ${isDarkMode ? 'border-white/10' : 'border-black/5'}
         shadow-lg hover:shadow-2xl transition-all duration-300`}
     >
-      {/* Updated Project Image */}
-      <div className="relative aspect-video overflow-hidden bg-gray-900">
-        <Image
-          src={project.bgImage}
-          alt={project.title}
-          width={600}
-          height={338}
-          className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-          onError={(e) => {
-            // Use a default placeholder image if both project image and fallback fail
-            e.target.src = '/images/placeholder.jpg';
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent 
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-        />
+      <h3 className={`text-xl font-bold transition-colors duration-300
+        ${isDarkMode ? 'text-white group-hover:text-blue-400' : 
+          'text-gray-900 group-hover:text-blue-600'}`}>
+        {project.title}
+      </h3>
+      
+      <p className={`text-sm
+        ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        {project.technologies?.map((tech) => (
+          <span
+            key={tech}
+            className={`text-xs px-3 py-1 rounded-full
+              ${isDarkMode 
+                ? 'bg-blue-500/10 text-blue-400' 
+                : 'bg-blue-500/10 text-blue-600'}`}
+          >
+            {tech}
+          </span>
+        ))}
       </div>
 
-      {/* Project Info */}
-      <div className="p-6 space-y-4">
-        <h3 className={`text-xl font-bold transition-colors duration-300
-          ${isDarkMode ? 'text-white group-hover:text-blue-400' : 
-            'text-gray-900 group-hover:text-blue-600'}`}>
-          {project.title}
-        </h3>
+      <div className="pt-4 flex items-center justify-between">
+        <motion.a
+          href={project.demoLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ x: 4 }}
+          className={`inline-flex items-center gap-2 text-sm font-medium
+            ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}
+        >
+          View Live
+          <HiExternalLink className="w-4 h-4" />
+        </motion.a>
         
-        <p className={`text-sm line-clamp-2
-          ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-          {project.description}
-        </p>
-
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2">
-          {project.technologies?.map((tech) => (
-            <span
-              key={tech}
-              className={`text-xs px-3 py-1 rounded-full
-                ${isDarkMode 
-                  ? 'bg-blue-500/10 text-blue-400' 
-                  : 'bg-blue-500/10 text-blue-600'}`}
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Project Links */}
-        <div className="pt-4 flex items-center justify-between">
-          <motion.a
-            href={project.demoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 4 }}
-            className={`inline-flex items-center gap-2 text-sm font-medium
-              ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}
-          >
-            View Live
-            <HiExternalLink className="w-4 h-4" />
-          </motion.a>
-          
-          <motion.a
-            href={project.codeLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 4 }}
-            className={`inline-flex items-center gap-2 text-sm font-medium
-              ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}
-          >
-            Source Code
-            <HiCode className="w-4 h-4" />
-          </motion.a>
-        </div>
+        <motion.a
+          href={project.codeLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ x: 4 }}
+          className={`inline-flex items-center gap-2 text-sm font-medium
+            ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}
+        >
+          Source Code
+          <HiCode className="w-4 h-4" />
+        </motion.a>
       </div>
     </motion.div>
   );
