@@ -1,189 +1,237 @@
 'use client'
-import React, { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { assets } from '@/assets/assets';
-import { useTheme } from '../context/ThemeContext';
-import { HiOutlineSparkles, HiArrowRight, HiDownload, HiCode, HiDatabase, HiChartBar } from 'react-icons/hi';
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useTheme } from '../context/ThemeContext'
+import { useCursorHandlers } from '../context/CursorContext'
+import Link from 'next/link'
 
 const Header = () => {
-  const { isDarkMode } = useTheme();
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll();
+  const { isDarkMode } = useTheme()
+  const headerRef = useRef(null)
+  const buttonHandlers = useCursorHandlers('button')
+  const linkHandlers = useCursorHandlers('link')
+  const [isLoaded, setIsLoaded] = useState(false)
   
-  // Parallax effects
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
+  // Trigger animations after initial load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
   
-  // Stats with animations
-  const stats = [
-    { icon: <HiCode />, label: 'Full Stack Developer' },
-    { icon: <HiDatabase />, label: 'Data Scientist' },
-    { icon: <HiChartBar />, label: 'ML Engineer' }
-  ];
-
+  // Advanced scroll animations
+  const { scrollYProgress } = useScroll({
+    target: headerRef,
+    offset: ["start start", "end start"]
+  })
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100])
+  const scale = useTransform(scrollYProgress, [0, 0.25], [1, 0.98])
+  const textY = useTransform(scrollYProgress, [0, 0.3], [0, -30])
+  
+  // Professional titles with more variety
+  const statementLines = [
+    "AI Engineer",
+    "ML Developer",
+    "Creative Technologist"
+  ]
+  
   return (
-    <header id="header" className="relative min-h-[100vh] flex items-center overflow-hidden pt-20">
-      {/* Animated Background */}
-      <div className="absolute inset-0 w-full h-full">
+    <section 
+      ref={headerRef}
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-white dark:bg-black"
+    >
+      <div className="container mx-auto px-6 md:px-16 py-24 relative z-10">
         <motion.div 
-          className={`absolute inset-0 ${isDarkMode ? 'bg-black' : 'bg-white'}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          style={{ scale, y: textY }}
+          className="max-w-7xl mx-auto"
         >
-          {/* Gradient Orbs */}
-          <motion.div
-            className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: isDarkMode 
-                ? 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, rgba(0,0,0,0) 70%)'
-                : 'radial-gradient(circle, rgba(124,58,237,0.1) 0%, rgba(255,255,255,0) 70%)',
-              y: bgY
-            }}
-          />
-          <motion.div
-            className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: isDarkMode 
-                ? 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(0,0,0,0) 70%)'
-                : 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(255,255,255,0) 70%)',
-              y: bgY
-            }}
-          />
-        </motion.div>
-
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,black_70%,transparent_100%)]" />
-      </div>
-
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
-          {/* Content */}
-          <motion.div 
-            className="space-y-8"
-            style={{ y: textY }}
-          >
-            {/* Animated Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                ${isDarkMode 
-                  ? 'bg-white/5 text-violet-300 border border-violet-500/20' 
-                  : 'bg-violet-50 text-violet-600 border border-violet-100'}`}
-            >
-              <HiOutlineSparkles className="w-5 h-5" />
-              <span className="text-sm font-medium">Available for Projects</span>
-            </motion.div>
-
-            {/* Title Section */}
-            <div className="space-y-4">
-              <motion.h1 
-                className={`text-5xl sm:text-6xl lg:text-7xl font-bold
-                  ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-x-12">
+            <div className="md:col-span-12 lg:col-span-10 xl:col-span-9">
+              {/* Professional badge pill */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.165, 0.84, 0.44, 1] }}
+                className="glass-light dark:glass-dark backdrop-blur-md mb-10 md:mb-16 inline-flex items-center px-6 py-2.5 rounded-full text-black/80 dark:text-white/90 text-sm font-medium font-unbounded tracking-wide shadow-sm"
               >
-                Building the
-                <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-blue-500">
-                  Future with AI
+                <span className="relative flex h-2 w-2 mr-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 dark:bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 dark:bg-emerald-400"></span>
                 </span>
-              </motion.h1>
-
-              {/* Animated Stats */}
-              <div className="flex flex-wrap gap-4 pt-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg
-                      ${isDarkMode ? 'bg-white/5' : 'bg-black/5'}`}
-                  >
-                    <span className={isDarkMode ? 'text-violet-400' : 'text-violet-600'}>
-                      {stat.icon}
-                    </span>
-                    <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                      {stat.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`group flex items-center justify-center gap-2 px-8 py-4 rounded-2xl
-                  font-medium text-white transition-all duration-300
-                  bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700
-                  shadow-lg hover:shadow-xl hover:shadow-purple-500/20`}
-              >
-                Start a Project
-                <HiArrowRight className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              </motion.a>
-
-              <motion.a
-                href="/resume.pdf"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`group flex items-center justify-center gap-2 px-8 py-4 rounded-2xl
-                  font-medium transition-all duration-300
-                  ${isDarkMode 
-                    ? 'bg-white/10 hover:bg-white/20 text-white' 
-                    : 'bg-black/5 hover:bg-black/10 text-gray-900'}
-                  backdrop-blur-sm`}
-              >
-                Download CV
-                <HiDownload className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Updated Image Section */}
-          <motion.div
-            ref={containerRef}
-            className="relative w-full max-w-[320px] aspect-[3/4] mx-auto" // Updated sizing
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="relative h-full">
-              {/* Subtle Glow Effect */}
-              <div className="absolute inset-0 -left-4 -top-4 bg-gradient-to-r 
-                from-purple-500/20 to-blue-500/20 rounded-2xl blur-2xl" />
+                Available for Projects
+              </motion.div>
               
-              {/* Main Image Container */}
-              <div className={`relative h-full rounded-2xl overflow-hidden
-                ${isDarkMode ? 'border border-white/10' : 'border border-black/5'}
-                shadow-lg hover:shadow-xl transition-shadow duration-300`}
-              >
-                <Image
-                  src={assets.profile_img.src}
-                  alt="Rudradev"
-                  fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                  priority
-                  quality={95}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t 
-                  ${isDarkMode 
-                    ? 'from-black/40 to-transparent' 
-                    : 'from-black/20 to-transparent'}`} 
+              {/* Main name heading with sophisticated typography and layout */}
+              <div className="mb-12 md:mb-16">
+                <div className="relative overflow-hidden">
+                  <motion.div
+                    initial={{ y: 120 }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
+                  >
+                    <h1 className="text-7xl md:text-[100px] lg:text-[130px] xl:text-[150px] font-dmSerif text-black dark:text-white leading-[0.85] tracking-tight">
+                      <span className="block">Rudradev</span>
+                    </h1>
+                  </motion.div>
+                </div>
+                
+                <div className="relative overflow-hidden mt-3">
+                  <motion.div
+                    initial={{ y: 80 }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.65, ease: [0.165, 0.84, 0.44, 1] }}
+                  >
+                    <h1 className="text-7xl md:text-[100px] lg:text-[130px] xl:text-[150px] font-dmSerif italic text-black/75 dark:text-white/75 leading-[0.85] tracking-tight">
+                      <span className="block">Myadara</span>
+                    </h1>
+                  </motion.div>
+                </div>
+                
+                {/* Refined accent line with sophisticated animation */}
+                <motion.div 
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ duration: 1.5, delay: 1.2, ease: [0.165, 0.84, 0.44, 1] }}
+                  className="mt-6 w-24 h-[2px] bg-black/30 dark:bg-white/30 origin-left"
                 />
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </header>
-  );
-};
 
-export default Header;
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+                <div>
+                  {/* Professional title in an elegant glass container */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+                    className="glass-light dark:glass-dark backdrop-blur-md rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-sm mb-12 md:mb-0"
+                  >
+                    <div className="relative h-16">
+                      {statementLines.map((line, index) => (
+                        <motion.div 
+                          key={index}
+                          initial={{ opacity: 0 }}
+                          animate={{ 
+                            opacity: [0, 1, 1, 0],
+                            y: [20, 0, 0, -20]
+                          }}
+                          transition={{ 
+                            duration: 5,
+                            times: [0, 0.1, 0.9, 1],
+                            delay: index * 5,
+                            repeat: Infinity,
+                            repeatDelay: (statementLines.length - 1) * 5
+                          }}
+                          className={`absolute inset-0 flex items-center ${index !== 0 ? 'opacity-0' : ''}`}
+                        >
+                          <span className="text-3xl md:text-3xl lg:text-4xl font-medium font-playfair italic text-black/90 dark:text-white/90">{line}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    {/* Elegant decorative elements */}
+                    <div className="absolute right-8 bottom-8 flex space-x-1.5">
+                      {[0, 1, 2].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 1.8 + (i * 0.1), ease: [0.165, 0.84, 0.44, 1] }}
+                          className="w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40"
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+                
+                <div className="flex flex-col justify-between">
+                  {/* Description with refined typography and border */}
+                  <motion.p 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.9, ease: [0.165, 0.84, 0.44, 1] }}
+                    className="text-lg md:text-xl text-black/70 dark:text-white/70 font-grotesk leading-relaxed pb-6 pl-5 border-l-[2px] border-black/15 dark:border-white/15"
+                  >
+                    I create intelligent systems and immersive experiences that bridge the gap between 
+                    technology and creativity, focusing on AI innovation, machine learning solutions, and
+                    human-centered design.
+                  </motion.p>
+                  
+                  {/* CTA buttons with refined glass morphism */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1, ease: [0.165, 0.84, 0.44, 1] }}
+                    className="flex flex-col sm:flex-row gap-4 mt-auto"
+                  >
+                    <Link href="#work" className="group">
+                      <motion.button
+                        {...buttonHandlers}
+                        className="glass-light dark:glass-dark backdrop-blur-md px-7 py-4 text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center gap-2 font-unbounded shadow-sm"
+                        whileHover={{ 
+                          scale: 1.03,
+                          boxShadow: isDarkMode 
+                            ? '0 0 15px 2px rgba(255, 255, 255, 0.1)' 
+                            : '0 0 15px 2px rgba(0, 0, 0, 0.05)' 
+                        }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        View my work
+                        <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </motion.button>
+                    </Link>
+                    
+                    <Link href="#contact" className="group">
+                      <motion.button
+                        {...buttonHandlers}
+                        className="px-7 py-4 text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center gap-2 font-unbounded"
+                        whileHover={{ 
+                          scale: 1.03,
+                          boxShadow: isDarkMode 
+                            ? '0 0 15px 2px rgba(255, 255, 255, 0.05)' 
+                            : '0 0 15px 2px rgba(0, 0, 0, 0.02)' 
+                        }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Contact me
+                      </motion.button>
+                    </Link>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Elegant scroll indicator */}
+          <motion.div
+            style={{ opacity, y }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-none"
+          >
+            <motion.div
+              animate={{ 
+                y: [0, 8, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="glass-light dark:glass-dark backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-3 shadow-sm"
+            >
+              <span className="text-sm font-unbounded tracking-wide text-black/70 dark:text-white/70">Scroll</span>
+              <svg className="w-4 h-4 text-black/70 dark:text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+export default Header

@@ -1,44 +1,41 @@
 'use client'
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useState, useEffect, useContext } from 'react'
 
-const ThemeContext = createContext()
+export const ThemeContext = createContext()
 
-export function ThemeProvider({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(true)
-  const [mounted, setMounted] = useState(false)
+export const ThemeProvider = ({ children }) => {
+  // Always set to false (light mode)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    try {
-      const savedTheme = localStorage.getItem('theme')
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      setIsDarkMode(savedTheme ? savedTheme === 'dark' : prefersDark)
-    } catch (error) {
-      console.error('Theme initialization error:', error)
-    }
+    // Always ensure light mode is set
+    setIsDarkMode(false)
+    document.documentElement.classList.remove('dark')
+    localStorage.setItem('theme', 'light')
+    setIsLoaded(true)
   }, [])
 
+  // Keep the toggle function for API compatibility but make it do nothing
   const toggleTheme = () => {
-    try {
-      const newTheme = !isDarkMode
-      setIsDarkMode(newTheme)
-      localStorage.setItem('theme', newTheme ? 'dark' : 'light')
-    } catch (error) {
-      console.error('Theme toggle error:', error)
-    }
-  }
-
-  if (!mounted) {
-    return null
+    // Function kept for compatibility but does nothing
+    return false
   }
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        isDarkMode: false, // Always false
+        toggleTheme,
+        isLoaded
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   )
 }
 
+// Custom hook for using the theme context
 export const useTheme = () => {
   const context = useContext(ThemeContext)
   if (context === undefined) {
@@ -46,3 +43,5 @@ export const useTheme = () => {
   }
   return context
 }
+
+export default ThemeProvider

@@ -1,155 +1,150 @@
 'use client'
-import React, { memo } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import Link from 'next/link'
 import { useTheme } from '../context/ThemeContext'
-import { HiExternalLink, HiCode, HiLightningBolt } from 'react-icons/hi'
-import { workData } from '../data/projects'
+import { useCursorHandlers } from '../context/CursorContext'
 
-const Work = memo(() => {
-  const { isDarkMode } = useTheme();
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
+const Work = () => {
+  const { isDarkMode } = useTheme()
+  const sectionRef = useRef(null)
+  const headingRef = useRef(null)
+  const isHeadingInView = useInView(headingRef, { once: true, margin: "-100px 0px -100px 0px" })
+  const linkHandlers = useCursorHandlers('link')
+  
+  // Enhanced scroll animations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+  
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0])
+  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [50, 0, 0, -50])
 
-  const ProjectCard = ({ project }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      className={`group relative rounded-2xl overflow-hidden p-6 space-y-4
-        ${isDarkMode ? 'bg-white/5' : 'bg-white'}
-        border ${isDarkMode ? 'border-white/10' : 'border-black/5'}
-        shadow-lg hover:shadow-2xl transition-all duration-300`}
-    >
-      <h3 className={`text-xl font-bold transition-colors duration-300
-        ${isDarkMode ? 'text-white group-hover:text-blue-400' : 
-          'text-gray-900 group-hover:text-blue-600'}`}>
-        {project.title}
-      </h3>
-      
-      <p className={`text-sm
-        ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2">
-        {project.technologies?.map((tech) => (
-          <span
-            key={tech}
-            className={`text-xs px-3 py-1 rounded-full
-              ${isDarkMode 
-                ? 'bg-blue-500/10 text-blue-400' 
-                : 'bg-blue-500/10 text-blue-600'}`}
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      <div className="pt-4 flex items-center justify-between">
-        <motion.a
-          href={project.demoLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ x: 4 }}
-          className={`inline-flex items-center gap-2 text-sm font-medium
-            ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}
-        >
-          View Live
-          <HiExternalLink className="w-4 h-4" />
-        </motion.a>
-        
-        <motion.a
-          href={project.codeLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ x: 4 }}
-          className={`inline-flex items-center gap-2 text-sm font-medium
-            ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}
-        >
-          Source Code
-          <HiCode className="w-4 h-4" />
-        </motion.a>
-      </div>
-    </motion.div>
-  );
+  // Project data exactly like Haolun Yang's site
+  const projects = [
+    {
+      id: 1,
+      title: "Red Bull TV for visionOS Immersive Media",
+      link: "https://example.com/red-bull-tv"
+    },
+    {
+      id: 2,
+      title: "SixD SwiftUI & Interaction Design",
+      link: "https://example.com/sixd"
+    },
+    {
+      id: 3,
+      title: "Oxygen Spatial Brainstorming with AI",
+      link: "https://example.com/oxygen"
+    },
+    {
+      id: 4,
+      title: "Radius Intuitive Dream Job Finder",
+      link: "https://example.com/radius"
+    },
+    {
+      id: 5,
+      title: "Geometry Nodes Lab",
+      link: "https://example.com/geometry-nodes"
+    },
+    {
+      id: 6,
+      title: "Spatial Loading",
+      link: "https://example.com/spatial-loading"
+    }
+  ];
 
   return (
-    <section className={`relative min-h-screen py-32 
-      ${isDarkMode ? 'bg-black' : 'bg-white'}`} id="work">
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
+    <section
+      id="work"
+      ref={sectionRef}
+      className="relative py-24 md:py-32 bg-white"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <motion.div 
-          className="absolute w-full h-full"
-          style={{ opacity }}
+          style={{ opacity, y }}
+          className="w-full"
         >
-          {[...Array(30)].map((_, i) => (
+          {/* Enhanced section heading with AOI styling */}
+          <div className="mb-24 md:mb-36">
             <motion.div
-              key={i}
-              className={`absolute rounded-full 
-                ${isDarkMode ? 'bg-blue-500' : 'bg-violet-300'}`}
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                width: `${Math.random() * 4}px`,
-                height: `${Math.random() * 4}px`,
-                opacity: isDarkMode ? 0.1 : 0.2,
-              }}
-              animate={{
-                y: [0, Math.random() * 100 - 50],
-                opacity: isDarkMode ? [0.1, 0.3, 0.1] : [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: Math.random() * 5 + 5,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          ))}
-        </motion.div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-20"
-        >
-          <motion.div
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6
-              ${isDarkMode ? 'bg-blue-500/10 text-blue-400' : 'bg-blue-500/10 text-blue-600'}`}
-          >
-            <HiLightningBolt className="w-4 h-4" />
-            Featured Projects
-          </motion.div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6
-            ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            Recent Adventures in Code
-          </h2>
-          <p className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            A collection of projects that showcase my passion for building innovative solutions
-          </p>
-        </motion.div>
-
-        {/* Projects Grid with Error Boundary */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {workData?.map((project, index) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-        </div>
-
-        {/* Fallback for empty projects */}
-        {(!workData || workData.length === 0) && (
-          <div className={`text-center py-20 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            Projects coming soon...
+              ref={headingRef}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isHeadingInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <h2 className="aoi-heading text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-black mb-8">
+                I designed and prototyped multiple web apps to explore modern frameworks.
+              </h2>
+            </motion.div>
           </div>
-        )}
+
+          {/* Project list with enhanced animations and styling */}
+          <div className="space-y-16 md:space-y-24">
+            {projects.map((project, index) => (
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={index}
+                isHeadingInView={isHeadingInView} 
+                linkHandlers={linkHandlers}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
-  );
-});
+  )
+}
 
-Work.displayName = 'Work';
-export default Work;
+const ProjectCard = ({ project, index, isHeadingInView, linkHandlers }) => {
+  const projectRef = useRef(null)
+  const isProjectInView = useInView(projectRef, { once: true, margin: "-10% 0px" })
+  
+  // Split text for character animation
+  const titleChars = project.title.split('')
+  
+  return (
+    <motion.div
+      ref={projectRef}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isHeadingInView && isProjectInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ 
+        duration: 1, 
+        delay: 0.2 + (index * 0.1), 
+        ease: [0.22, 1, 0.36, 1] 
+      }}
+      className="group reveal-item"
+    >
+      <Link 
+        href={project.link} 
+        className="block hover-lift"
+        {...linkHandlers}
+      >
+        <div className="overflow-hidden">
+          <h3 className="aoi-heading text-2xl md:text-3xl lg:text-4xl font-medium text-black/80 group-hover:text-black transition-colors duration-500">
+            {titleChars.map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: '100%', opacity: 0 }}
+                animate={isProjectInView ? { y: 0, opacity: 1 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.3 + (index * 0.1) + (i * 0.01),
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                className="inline-block"
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
+          </h3>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
+
+export default Work
