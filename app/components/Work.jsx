@@ -25,33 +25,18 @@ const Work = () => {
   const projects = [
     {
       id: 1,
-      title: "Red Bull TV for visionOS Immersive Media",
+      title: "VIRTUAL ART GALLERY",
       link: "https://example.com/red-bull-tv"
     },
     {
       id: 2,
-      title: "SixD SwiftUI & Interaction Design",
+      title: "THE RUN CLUB WEBAPP",
       link: "https://example.com/sixd"
     },
     {
       id: 3,
-      title: "Oxygen Spatial Brainstorming with AI",
+      title: "AI-powered content optimization",
       link: "https://example.com/oxygen"
-    },
-    {
-      id: 4,
-      title: "Radius Intuitive Dream Job Finder",
-      link: "https://example.com/radius"
-    },
-    {
-      id: 5,
-      title: "Geometry Nodes Lab",
-      link: "https://example.com/geometry-nodes"
-    },
-    {
-      id: 6,
-      title: "Spatial Loading",
-      link: "https://example.com/spatial-loading"
     }
   ];
 

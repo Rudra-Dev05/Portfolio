@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#1a1a1a" />
+  
+  <!-- Decorative Creative Element (like a code bracket) -->
+  <path d="M25 30 L40 20 L40 80 L25 70 Z" fill="#6366f1" opacity="0.8" />
+  
+  <!-- R Letter -->
+  <path d="M45 30 L45 70 M45 30 L60 30 Q70 30 70 40 Q70 50 60 50 L45 50 L60 70" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  
+  <!-- M Letter Stylized -->
+  <path d="M55 50 L55 70 M55 50 L65 60 L75 50 L75 70" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+</svg> 

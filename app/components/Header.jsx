@@ -195,7 +195,7 @@ const Header = () => {
           {/* Elegant scroll indicator - repositioned and restyled */}
           <motion.div
             style={{ opacity, y }}
-            className="absolute bottom-24 md:bottom-16 left-1/2 -translate-x-1/2 cursor-pointer magnetic-element z-10 mt-20"
+            className="absolute bottom-8 right-6 md:right-16 cursor-pointer magnetic-element z-10"
             onClick={() => {
               const nextSection = document.querySelector('#work');
               if (nextSection) {

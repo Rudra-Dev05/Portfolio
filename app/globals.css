@@ -332,16 +332,31 @@ body {
     cursor: none !important;
     transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
+  
+  /* Enhanced cursor effects - desktop only */
+  a:hover, button:hover, [role="button"]:hover, .magnetic-element:hover {
+    transform: scale(1.03);
+  }
 }
 
 /* Mobile cursor behavior */
-@media (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
   .hide-cursor {
     cursor: auto !important;
   }
   
   .magnetic-element, a, button, [role="button"] {
     cursor: pointer !important;
+  }
+  
+  /* Disable magnetic and cursor effects on mobile/touch */
+  .cursor-container {
+    display: none !important;
+  }
+  
+  /* Disable hover transform effects on mobile */
+  a:hover, button:hover, [role="button"]:hover, .magnetic-element:hover {
+    transform: none !important;
   }
 }
 
@@ -418,16 +433,6 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: #000;
   border-radius: 2px;
-}
-
-/* Enhanced cursor effects */
-a, button, [role="button"] {
-  cursor: none !important;
-  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-a:hover, button:hover, [role="button"]:hover, .magnetic-element:hover {
-  transform: scale(1.03);
 }
 
 /* Text stroke effect */

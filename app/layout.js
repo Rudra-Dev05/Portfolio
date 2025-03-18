@@ -43,6 +43,11 @@ const dmSerif = DM_Serif_Display({
 export const metadata = {
   title: 'Rudradev Myadara',
   description: 'Creative Developer & Designer',
+  icons: {
+    icon: [
+      { url: '/favicon.svg' },
+    ],
+  },
 }
 
 export default function RootLayout({ children }) {
