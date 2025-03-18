@@ -1,4 +1,4 @@
-# Portfolio | Modern Web Development Showcase
+# Modern Portfolio Website
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 15" />
@@ -7,19 +7,21 @@
 </div>
 
 <div align="center">
-  <p>A sleek, interactive portfolio showcasing my skills and projects as a CSE student specializing in AI and Machine Learning.</p>
+  <p>A modern, responsive portfolio website built with Next.js 15, React 19, and Tailwind CSS. Features smooth animations, dark/light mode, and an intuitive user interface.</p>
 </div>
 
 ---
 
 ## ✨ Features
 
-- **Premium Design** inspired by high-end digital agency aesthetics
-- **Dark/Light Mode** with smooth theme transitions
-- **Interactive Elements** with custom cursor effects and animations
-- **Responsive Layout** optimized for all devices
-- **Performance Focused** with optimized loading and rendering
-- **Accessibility** designed following a11y best practices
+- **Modern Tech Stack**: Built with Next.js 15, React 19, and Tailwind CSS
+- **Responsive Design**: Optimized for all device sizes
+- **Dark/Light Mode**: Seamless theme switching with system preference detection
+- **Smooth Animations**: Powered by Framer Motion
+- **Custom Cursor**: Interactive cursor effects for enhanced user experience
+- **Smooth Scrolling**: Implemented with Locomotive Scroll
+- **Performance Optimized**: Built with Next.js App Router and Turbopack
+- **Accessibility First**: Following WCAG guidelines and best practices
 
 ## 🚀 Projects Showcase
 
@@ -39,55 +41,63 @@ Includes an experience timeline featuring:
 
 ## 🛠️ Tech Stack
 
+- **Framework**: Next.js 15 with App Router
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS with custom configuration
+- **Animations**: Framer Motion
+- **Icons**: React Icons
+- **State Management**: React Context API
+- **Smooth Scrolling**: Locomotive Scroll
+- **Development Tools**: ESLint, PostCSS
+
+## 📁 Project Structure
+
 ```
-Frontend Framework: Next.js 15 with App Router
-UI Library: React 19
-Styling: Tailwind CSS
-Animations: Framer Motion
-Icons: React Icons
-State Management: React Context API
+portfolio/
+├── app/
+│   ├── components/     # Reusable UI components
+│   ├── context/       # React Context providers
+│   ├── about/         # About page components
+│   ├── globals.css    # Global styles
+│   ├── layout.js      # Root layout component
+│   └── page.js        # Home page component
+├── public/            # Static assets
+└── ...config files    # Various configuration files
 ```
 
-## 🔧 Getting Started
+## 🚀 Getting Started
 
-```bash
-# Clone the repository
-git clone https://github.com/Rudra-Dev05/Portfolio.git
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Rudra-Dev05/Portfolio.git
+   ```
 
-# Navigate to the project directory
-cd Portfolio
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Install dependencies
-npm install
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-# Run development server with Turbopack
-npm run dev
-```
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser**
 
-Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+## 🔧 Available Scripts
 
-## 📷 Preview
-
-<div align="center">
-  <em>Portfolio preview screenshots coming soon</em>
-</div>
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
 
 ## 🎨 Customization
 
-### Typography
-
-This portfolio uses premium typography:
-
-- **Neue Haas Display** - For headings and prominent text
-- **Neue Montreal** - For body text and UI elements
-- **JetBrains Mono** - For code snippets
-
 ### Theme Configuration
 
-Colors can be customized in the `tailwind.config.mjs` file:
+The project uses a custom color scheme defined in `tailwind.config.mjs`:
 
 ```js
-// Light mode, dark mode, and accent colors
 colors: {
   cream: { /* Light mode palette */ },
   midnight: { /* Dark mode palette */ },
@@ -95,40 +105,50 @@ colors: {
 }
 ```
 
-## 📱 Responsive Design
+### Typography
 
-The portfolio is fully responsive with specific optimizations for:
-- Desktop experiences (1200px+)
-- Tablet layouts (768px - 1199px)
-- Mobile interfaces (320px - 767px)
-- Large displays (1440px+)
+The project uses a custom typography system:
+- **Neue Haas Display** - For headings
+- **Neue Montreal** - For body text
+- **JetBrains Mono** - For code snippets
 
-## 📦 Deployment
+## 📱 Responsive Breakpoints
 
-```bash
-# Build for production
-npm run build
+- Mobile: 320px - 767px
+- Tablet: 768px - 1199px
+- Desktop: 1200px+
+- Large Display: 1440px+
 
-# Start production server
-npm start
-```
+## 🔍 Performance Optimizations
 
-Optimized for deployment on [Vercel](https://vercel.com).
-
-## 🔍 Performance & SEO
-
-- Optimized with Next.js Image component
+- Next.js Image component for optimized images
 - Dynamic imports with loading states
-- Custom CSS utilities
-- Complete metadata optimization for search engines
+- Custom CSS utilities for better performance
+- Metadata optimization for SEO
 - Social media embed support
+
+## 📦 Dependencies
+
+### Core Dependencies
+- next: 15.1.7
+- react: ^19.0.0
+- react-dom: ^19.0.0
+- framer-motion: ^12.4.3
+- locomotive-scroll: ^4.1.4
+- react-icons: ^5.4.0
+
+### Development Dependencies
+- tailwindcss: ^3.4.1
+- postcss: ^8
+- eslint: ^9
+- @eslint/eslintrc: ^3
 
 ## 📄 License
 
-This project is available under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
-  <p>Developed with ❤️ by <a href="https://github.com/Rudra-Dev05">Rudra-Dev05</a></p>
+  <p>Built with ❤️ by <a href="https://github.com/Rudra-Dev05">Rudra-Dev05</a></p>
 </div>
