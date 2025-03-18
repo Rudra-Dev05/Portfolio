@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export const CursorContext = createContext()
@@ -10,15 +10,20 @@ export const CursorProvider = ({ children }) => {
   const [cursorType, setCursorType] = useState('default')
   const [cursorText, setCursorText] = useState('')
   const [isVisible, setIsVisible] = useState(false)
+  const [magneticEnabled, setMagneticEnabled] = useState(true)
   
   // Initial position outside viewport
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   
   // Smooth spring animation for cursor
-  const springConfig = { damping: 25, stiffness: 300 }
+  const springConfig = { damping: 22, stiffness: 350, mass: 0.45 }
   const smoothX = useSpring(cursorX, springConfig)
   const smoothY = useSpring(cursorY, springConfig)
+  
+  // Scale spring for hover effects
+  const scale = useMotionValue(1)
+  const scaleSpring = useSpring(scale, { damping: 15, stiffness: 300 })
 
   useEffect(() => {
     const moveCursor = (e) => {
@@ -38,7 +43,7 @@ export const CursorProvider = ({ children }) => {
       setIsVisible(true)
     }
 
-    window.addEventListener('mousemove', moveCursor)
+    window.addEventListener('mousemove', moveCursor, { passive: true })
     document.addEventListener('mouseleave', handleMouseLeave)
     document.addEventListener('mouseenter', handleMouseEnter)
     
@@ -48,6 +53,61 @@ export const CursorProvider = ({ children }) => {
       document.removeEventListener('mouseenter', handleMouseEnter)
     }
   }, [cursorX, cursorY, isVisible])
+  
+  // Initialize magnetic effects
+  useEffect(() => {
+    if (!magneticEnabled) return;
+    
+    const setupMagneticElements = () => {
+      const elements = document.querySelectorAll('.magnetic-element');
+      
+      const handleMouseEnter = (e) => {
+        const el = e.currentTarget;
+        setCursor('button');
+        scale.set(1.2);
+      };
+      
+      const handleMouseLeave = () => {
+        resetCursor();
+        scale.set(1);
+      };
+      
+      elements.forEach(element => {
+        element.addEventListener('mouseenter', handleMouseEnter);
+        element.addEventListener('mouseleave', handleMouseLeave);
+      });
+      
+      return () => {
+        elements.forEach(element => {
+          element.removeEventListener('mouseenter', handleMouseEnter);
+          element.removeEventListener('mouseleave', handleMouseLeave);
+        });
+      };
+    };
+    
+    // Add magnetic class to interactive elements that don't have it yet
+    const enhanceDefaultInteractiveElements = () => {
+      const interactiveElements = document.querySelectorAll('a, button, [role="button"]');
+      
+      interactiveElements.forEach(element => {
+        if (!element.classList.contains('magnetic-element')) {
+          element.classList.add('magnetic-element');
+        }
+      });
+    };
+    
+    const initialize = () => {
+      enhanceDefaultInteractiveElements();
+      return setupMagneticElements();
+    };
+    
+    // Delayed initialization to ensure DOM is fully loaded
+    const timer = setTimeout(initialize, 500);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [magneticEnabled, scale]);
 
   // Hide cursor on mobile devices
   useEffect(() => {
@@ -59,14 +119,29 @@ export const CursorProvider = ({ children }) => {
     }
   }, [])
 
-  const setCursor = (type, text = '') => {
+  const setCursor = useCallback((type, text = '') => {
     setCursorType(type)
     setCursorText(text)
-  }
+    
+    // Set scale based on cursor type
+    if (type === 'button' || type === 'link') {
+      scale.set(1.2);
+    } else if (type === 'text') {
+      scale.set(1.1);
+    } else {
+      scale.set(1);
+    }
+  }, [scale])
 
-  const resetCursor = () => {
+  const resetCursor = useCallback(() => {
     setCursorType('default')
     setCursorText('')
+    scale.set(1);
+  }, [scale])
+
+  // Enable/disable magnetic effect
+  const toggleMagnetic = (enabled) => {
+    setMagneticEnabled(enabled);
   }
 
   // Custom hook to handle common cursor interactions
@@ -85,6 +160,8 @@ export const CursorProvider = ({ children }) => {
         setCursor,
         resetCursor,
         useCursorHandlers,
+        toggleMagnetic,
+        magneticEnabled,
       }}
     >
       {children}
@@ -98,6 +175,7 @@ export const CursorProvider = ({ children }) => {
           translateX: '-50%',
           translateY: '-50%',
           opacity: isVisible ? 1 : 0,
+          scale: scaleSpring,
         }}
         transition={{ duration: 0 }}
       />
@@ -117,8 +195,9 @@ export const CursorProvider = ({ children }) => {
           duration: 0.2,
           scale: { 
             type: 'spring',
-            damping: 25,
-            stiffness: 300
+            damping: 20,
+            stiffness: 300,
+            bounce: 0.15
           }, 
         }}
       />

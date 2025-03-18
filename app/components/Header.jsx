@@ -192,23 +192,32 @@ const Header = () => {
             </div>
           </div>
           
-          {/* Elegant scroll indicator */}
+          {/* Elegant scroll indicator - repositioned and restyled */}
           <motion.div
             style={{ opacity, y }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-none"
+            className="absolute bottom-24 md:bottom-16 left-1/2 -translate-x-1/2 cursor-pointer magnetic-element z-10 mt-20"
+            onClick={() => {
+              const nextSection = document.querySelector('#work');
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            {...buttonHandlers}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <motion.div
               animate={{ 
                 y: [0, 8, 0],
               }}
               transition={{
-                duration: 2.5,
+                duration: 1.8,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="glass-light dark:glass-dark backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-3 shadow-sm"
+              className="glass-light dark:glass-dark backdrop-blur-md rounded-full px-5 py-2 flex items-center gap-2 shadow-sm hover:shadow-md"
             >
-              <span className="text-sm font-unbounded tracking-wide text-black/70 dark:text-white/70">Scroll</span>
+              <span className="text-xs font-unbounded tracking-wide text-black/70 dark:text-white/70">Scroll</span>
               <svg className="w-4 h-4 text-black/70 dark:text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>

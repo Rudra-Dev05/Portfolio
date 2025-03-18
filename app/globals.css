@@ -397,6 +397,21 @@ body::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 
+/* Enhanced cursor effects */
+.magnetic-element {
+  cursor: none !important;
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+a, button, [role="button"] {
+  cursor: none !important;
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+a:hover, button:hover, [role="button"]:hover, .magnetic-element:hover {
+  transform: scale(1.03);
+}
+
 /* Text stroke effect */
 .text-stroke {
   -webkit-text-stroke: 1px currentColor;
