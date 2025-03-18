@@ -142,7 +142,7 @@ const Contact = () => {
                 <ContactItem 
                   icon={<HiLocationMarker />}
                   title="Location"
-                  content="San Francisco, CA"
+                  content="Hyderabad, India"
                   isDarkMode={isDarkMode}
                 />
               </div>

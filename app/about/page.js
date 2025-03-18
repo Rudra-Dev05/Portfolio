@@ -29,7 +29,7 @@ export default function About() {
               </h1>
               
               <h2 className="text-xl md:text-2xl lg:text-3xl font-normal max-w-3xl leading-relaxed text-black/80">
-                I'm John! Currently a Full Stack Developer & AI Engineer, I'm a problem solver with a passion for creating intuitive digital experiences that blend technology with thoughtful design.
+                I&apos;m Rudradev! Currently a Full Stack Developer & AI Engineer, I&apos;m a problem solver with a passion for creating intuitive digital experiences that blend technology with thoughtful design.
               </h2>
             </div>
             
@@ -92,14 +92,14 @@ export default function About() {
               </motion.div>
             </div>
             
-            {/* Let's chat section */}
+            {/* Let&apos;s chat section */}
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6 text-black">
-                Let's chat!
+                Let&apos;s chat!
               </h2>
               
               <p className="text-xl md:text-2xl max-w-3xl mb-12 leading-relaxed text-black/80">
-                When I say I'm curious, I'm serious. Would love to hear about your story and if I can assist :)
+                When I say I&apos;m curious, I&apos;m serious. Would love to hear about your story and if I can assist :)
               </p>
               
               <Link 
@@ -107,7 +107,7 @@ export default function About() {
                 className="inline-block text-xl md:text-2xl py-4 px-8 rounded-full bg-black text-white hover:bg-black/90 hover-lift shadow-lg transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-gray-800 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10">Let's Talk</span>
+                <span className="relative z-10">Let&apos;s Talk</span>
               </Link>
             </div>
             
@@ -149,7 +149,7 @@ export default function About() {
             {/* Current status section */}
             <div className="relative">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-6 text-black">
-                What I'm up to now
+                What I&apos;m up to now
               </h2>
               
               <p className="text-xl md:text-2xl max-w-3xl mb-6 leading-relaxed text-black/80">
@@ -160,7 +160,7 @@ export default function About() {
                 <li>• Working on AI-powered applications that make complex data accessible and actionable</li>
                 <li>• Exploring new interaction patterns for web interfaces using Framer Motion</li>
                 <li>• Learning more about 3D visualization techniques with Three.js</li>
-                <li>• Based in New York, but working with clients globally</li>
+                <li>• Based in Hyderabad, India, but working with clients globally</li>
               </ul>
             </div>
           </motion.div>

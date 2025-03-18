@@ -50,20 +50,6 @@ const Header = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-x-12">
             <div className="md:col-span-12 lg:col-span-10 xl:col-span-9">
-              {/* Professional badge pill */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: [0.165, 0.84, 0.44, 1] }}
-                className="glass-light dark:glass-dark backdrop-blur-md mb-10 md:mb-16 inline-flex items-center px-6 py-2.5 rounded-full text-black/80 dark:text-white/90 text-sm font-medium font-unbounded tracking-wide shadow-sm"
-              >
-                <span className="relative flex h-2 w-2 mr-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 dark:bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 dark:bg-emerald-400"></span>
-                </span>
-                Available for Projects
-              </motion.div>
-              
               {/* Main name heading with sophisticated typography and layout */}
               <div className="mb-12 md:mb-16">
                 <div className="relative overflow-hidden">
