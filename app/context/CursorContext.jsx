@@ -112,10 +112,30 @@ export const CursorProvider = ({ children }) => {
   // Hide cursor on mobile devices
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-      if (isMobile) {
-        setIsVisible(false)
-      }
+      const checkMobile = () => {
+        // Check for user agent
+        const userAgentMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Check for touch capability
+        const hasTouchScreen = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+        // Check for small screen (typical mobile breakpoint)
+        const isSmallScreen = window.innerWidth < 768;
+        
+        if (userAgentMobile || hasTouchScreen || isSmallScreen) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
+      };
+      
+      // Check initially
+      checkMobile();
+      
+      // Check on resize
+      window.addEventListener('resize', checkMobile);
+      
+      return () => {
+        window.removeEventListener('resize', checkMobile);
+      };
     }
   }, [])
 

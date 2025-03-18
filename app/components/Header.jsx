@@ -51,26 +51,26 @@ const Header = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-x-12">
             <div className="md:col-span-12 lg:col-span-10 xl:col-span-9">
               {/* Main name heading with sophisticated typography and layout */}
-              <div className="mb-12 md:mb-16">
+              <div className="mb-8 md:mb-12 lg:mb-16">
                 <div className="relative overflow-hidden">
                   <motion.div
                     initial={{ y: 120 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, delay: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
                   >
-                    <h1 className="text-7xl md:text-[100px] lg:text-[130px] xl:text-[150px] font-dmSerif text-black dark:text-white leading-[0.85] tracking-tight">
+                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-dmSerif text-black dark:text-white leading-[0.85] tracking-tight">
                       <span className="block">Rudradev</span>
                     </h1>
                   </motion.div>
                 </div>
                 
-                <div className="relative overflow-hidden mt-3">
+                <div className="relative overflow-hidden mt-2 sm:mt-3">
                   <motion.div
                     initial={{ y: 80 }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, delay: 0.65, ease: [0.165, 0.84, 0.44, 1] }}
                   >
-                    <h1 className="text-7xl md:text-[100px] lg:text-[130px] xl:text-[150px] font-dmSerif italic text-black/75 dark:text-white/75 leading-[0.85] tracking-tight">
+                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-dmSerif italic text-black/75 dark:text-white/75 leading-[0.85] tracking-tight">
                       <span className="block">Myadara</span>
                     </h1>
                   </motion.div>
@@ -81,20 +81,20 @@ const Header = () => {
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{ scaleX: 1, opacity: 1 }}
                   transition={{ duration: 1.5, delay: 1.2, ease: [0.165, 0.84, 0.44, 1] }}
-                  className="mt-6 w-24 h-[2px] bg-black/30 dark:bg-white/30 origin-left"
+                  className="mt-4 sm:mt-6 w-16 sm:w-24 h-[2px] bg-black/30 dark:bg-white/30 origin-left"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16">
                 <div>
                   {/* Professional title in an elegant glass container */}
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
-                    className="glass-light dark:glass-dark backdrop-blur-md rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-sm mb-12 md:mb-0"
+                    className="glass-light dark:glass-dark backdrop-blur-md rounded-2xl p-5 sm:p-6 md:p-8 relative overflow-hidden shadow-sm mb-8 sm:mb-12 md:mb-0"
                   >
-                    <div className="relative h-16">
+                    <div className="relative h-12 sm:h-16">
                       {statementLines.map((line, index) => (
                         <motion.div 
                           key={index}
@@ -112,13 +112,13 @@ const Header = () => {
                           }}
                           className={`absolute inset-0 flex items-center ${index !== 0 ? 'opacity-0' : ''}`}
                         >
-                          <span className="text-3xl md:text-3xl lg:text-4xl font-medium font-playfair italic text-black/90 dark:text-white/90">{line}</span>
+                          <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium font-playfair italic text-black/90 dark:text-white/90">{line}</span>
                         </motion.div>
                       ))}
                     </div>
                     
                     {/* Elegant decorative elements */}
-                    <div className="absolute right-8 bottom-8 flex space-x-1.5">
+                    <div className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8 flex space-x-1.5">
                       {[0, 1, 2].map((_, i) => (
                         <motion.div
                           key={i}
@@ -138,7 +138,7 @@ const Header = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.9, ease: [0.165, 0.84, 0.44, 1] }}
-                    className="text-lg md:text-xl text-black/70 dark:text-white/70 font-grotesk leading-relaxed pb-6 pl-5 border-l-[2px] border-black/15 dark:border-white/15"
+                    className="text-base sm:text-lg md:text-xl text-black/70 dark:text-white/70 font-grotesk leading-relaxed pb-4 sm:pb-6 pl-4 sm:pl-5 border-l-[2px] border-black/15 dark:border-white/15"
                   >
                     I create intelligent systems and immersive experiences that bridge the gap between 
                     technology and creativity, focusing on AI innovation, machine learning solutions, and
@@ -150,12 +150,12 @@ const Header = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1, ease: [0.165, 0.84, 0.44, 1] }}
-                    className="flex flex-col sm:flex-row gap-4 mt-auto"
+                    className="flex flex-col sm:flex-row gap-4 mt-6 sm:mt-auto"
                   >
-                    <Link href="#work" className="group">
+                    <Link href="#work" className="group w-full sm:w-auto">
                       <motion.button
                         {...buttonHandlers}
-                        className="glass-light dark:glass-dark backdrop-blur-md px-7 py-4 text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center gap-2 font-unbounded shadow-sm"
+                        className="w-full glass-light dark:glass-dark backdrop-blur-md px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded shadow-sm"
                         whileHover={{ 
                           scale: 1.03,
                           boxShadow: isDarkMode 
@@ -165,16 +165,16 @@ const Header = () => {
                         whileTap={{ scale: 0.98 }}
                       >
                         View my work
-                        <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                       </motion.button>
                     </Link>
                     
-                    <Link href="#contact" className="group">
+                    <Link href="#contact" className="group w-full sm:w-auto">
                       <motion.button
                         {...buttonHandlers}
-                        className="px-7 py-4 text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center gap-2 font-unbounded"
+                        className="w-full px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded"
                         whileHover={{ 
                           scale: 1.03,
                           boxShadow: isDarkMode 

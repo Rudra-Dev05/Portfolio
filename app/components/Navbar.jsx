@@ -398,13 +398,25 @@ const Navbar = () => {
             {/* Decorative grid background for mobile menu */}
             <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.2)_1px,transparent_1px)] bg-[size:8rem_8rem]"></div>
             
-            <div className="flex flex-col h-full justify-center items-center p-10">
+            {/* Close button positioned at top right */}
+            <div className="absolute top-6 right-6">
+              <motion.button 
+                className="flex items-center justify-center p-2 rounded-full glass-dark dark:glass-light"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+                whileTap={{ scale: 0.95 }}
+              >
+                <HiX className="w-6 h-6 text-white dark:text-black" />
+              </motion.button>
+            </div>
+            
+            <div className="flex flex-col h-full justify-center items-center p-6 sm:p-10">
               {navLinks.map(({ href, label }, index) => {
                 const active = isActive(href);
                 return (
                   <motion.div
                     key={href}
-                    className="my-2"
+                    className="my-3 w-full max-w-xs sm:max-w-sm"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ 
                       opacity: 1, 
@@ -420,17 +432,20 @@ const Navbar = () => {
                         delay: 0.05 * index
                       }
                     }}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <Link
                       href={href}
-                      onClick={(e) => scrollToSection(e, href)}
-                      className={`relative py-4 px-10 text-2xl font-medium tracking-wide ${
+                      onClick={(e) => {
+                        scrollToSection(e, href);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`relative py-3 sm:py-4 px-6 sm:px-10 text-xl sm:text-2xl font-medium tracking-wide text-center ${
                         active 
                           ? 'text-white dark:text-black' 
                           : 'text-black dark:text-white'
                       } rounded-full block font-unbounded`}
-                      {...linkHandlers}
                     >
                       <span className="relative z-10">{label}</span>
                       

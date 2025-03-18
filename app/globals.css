@@ -315,11 +315,34 @@ body {
   text-fill-color: transparent;
 }
 
-/* Acts of Imagination inspired typography and effects */
+/* Clean up duplicate cursor declarations */
 
-/* Hide default cursor */
-.hide-cursor {
-  cursor: none !important;
+/* Custom cursor effects - Desktop only */
+@media (hover: hover) and (pointer: fine) {
+  .hide-cursor {
+    cursor: none !important;
+  }
+  
+  .magnetic-element {
+    cursor: none !important;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  a, button, [role="button"] {
+    cursor: none !important;
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+}
+
+/* Mobile cursor behavior */
+@media (hover: none), (pointer: coarse) {
+  .hide-cursor {
+    cursor: auto !important;
+  }
+  
+  .magnetic-element, a, button, [role="button"] {
+    cursor: pointer !important;
+  }
 }
 
 /* Dramatic hover effects */
@@ -398,11 +421,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* Enhanced cursor effects */
-.magnetic-element {
-  cursor: none !important;
-  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
 a, button, [role="button"] {
   cursor: none !important;
   transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);

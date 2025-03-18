@@ -314,19 +314,54 @@ const Cursor = () => {
   const [supportsHover, setSupportsHover] = useState(false)
   
   useEffect(() => {
-    // Check if device supports hover
-    const mediaQuery = window.matchMedia('(hover: hover)')
-    setSupportsHover(mediaQuery.matches)
+    // Comprehensive check for mobile/touch devices
+    const isMobileOrTouch = () => {
+      // Check for hover capability
+      const hoverMediaQuery = window.matchMedia('(hover: hover)');
+      
+      // Check for touch capability
+      const hasTouchScreen = ('ontouchstart' in window) || 
+                             (navigator.maxTouchPoints > 0) || 
+                             (navigator.msMaxTouchPoints > 0);
+      
+      // Check user agent for mobile devices
+      const userAgentMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Check for small screen (typical mobile breakpoint)
+      const isSmallScreen = window.innerWidth < 768;
+      
+      return !hoverMediaQuery.matches || hasTouchScreen || userAgentMobile || isSmallScreen;
+    };
+    
+    const isDesktopWithHover = !isMobileOrTouch();
+    setSupportsHover(isDesktopWithHover);
     
     // Hide default cursor if hover is supported
-    if (mediaQuery.matches) {
-      document.body.classList.add('hide-cursor')
+    if (isDesktopWithHover) {
+      document.body.classList.add('hide-cursor');
+    } else {
+      document.body.classList.remove('hide-cursor');
     }
     
+    // Update on resize
+    const handleResize = () => {
+      const shouldShowCursor = !isMobileOrTouch();
+      setSupportsHover(shouldShowCursor);
+      
+      if (shouldShowCursor) {
+        document.body.classList.add('hide-cursor');
+      } else {
+        document.body.classList.remove('hide-cursor');
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
     return () => {
-      document.body.classList.remove('hide-cursor')
-    }
-  }, [])
+      document.body.classList.remove('hide-cursor');
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   if (!supportsHover) return null
 

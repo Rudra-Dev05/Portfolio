@@ -153,7 +153,7 @@ export default function About() {
               </h2>
               
               <p className="text-xl md:text-2xl max-w-3xl mb-6 leading-relaxed text-black/80">
-                Currently accepting new clients for Q1 2023.
+                Currently accepting new clients for Q1 2025.
               </p>
               
               <ul className="space-y-6 text-lg max-w-3xl text-black/80">
