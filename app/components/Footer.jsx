@@ -13,7 +13,7 @@ const Footer = () => {
   // Simple links - exactly like Haolun Yang's site
   const footerLinks = [
     { label: "Email", href: "mailto:myadararudradev@gmail.com" },
-    { label: "Resume", href: "/resume.pdf" },
+    { label: "Resume", href: "https://drive.google.com/file/d/13oN1fousZwZPAe11iz_fNYWDTQDlnno_/view?usp=sharing" },
     { label: "X/Twitter", href: "https://x.com/RMyadara" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/rudradev-myadara/" },
     { label: "GitHub", href: "https://github.com/Rudra-Dev05" },
