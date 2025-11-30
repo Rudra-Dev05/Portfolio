@@ -1,72 +1,90 @@
-# Modern Portfolio Website
+# Rudradev Myadara | System Engineer & Salesforce Developer
 
 <div align="center">
   <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 15" />
   <img src="https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
   <img src="https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Salesforce-Apex-00A1E0?style=for-the-badge&logo=salesforce&logoColor=white" alt="Salesforce Apex" />
+  <img src="https://img.shields.io/badge/Salesforce-LWC-00A1E0?style=for-the-badge&logo=salesforce&logoColor=white" alt="Salesforce LWC" />
 </div>
 
+<br />
+
 <div align="center">
-  <p>A modern, responsive portfolio website built with Next.js 15, React 19, and Tailwind CSS. Features smooth animations, dark/light mode, and an intuitive user interface.</p>
+  <p align="center">
+    <strong>System Engineer at Infosys | Salesforce Developer | Creative Technologist</strong>
+  </p>
+  <p align="center">
+    Based in Hyderabad, India 🇮🇳
+  </p>
+  <p align="center">
+    <a href="https://rudradev.com"><strong>Explore Portfolio »</strong></a>
+  </p>
 </div>
 
 ---
 
-## ✨ Features
+## 🚀 About Me
 
-- **Modern Tech Stack**: Built with Next.js 15, React 19, and Tailwind CSS
-- **Responsive Design**: Optimized for all device sizes
-- **Dark/Light Mode**: Seamless theme switching with system preference detection
-- **Smooth Animations**: Powered by Framer Motion
-- **Custom Cursor**: Interactive cursor effects for enhanced user experience
-- **Smooth Scrolling**: Implemented with Locomotive Scroll
-- **Performance Optimized**: Built with Next.js App Router and Turbopack
-- **Accessibility First**: Following WCAG guidelines and best practices
+I am a **System Engineer at Infosys** and a passionate **Salesforce Developer** with a knack for building intelligent, scalable, and visually stunning digital solutions. I code for fun and thrive on solving complex problems with elegant code.
 
-## 🚀 Projects Showcase
+- 🎓 **Education**: B.Tech in CSE (AIML), Vasavi College of Engineering (2025)
+- 💼 **Current Role**: System Engineer at Infosys
+- 🌟 **Specialization**: Salesforce Development (Apex, LWC, Admin), Full Stack Web Development (Next.js, React)
 
-The portfolio highlights notable projects including:
+---
 
-- Red Bull TV for visionOS Immersive Media
-- SixD SwiftUI & Interaction Design
-- Oxygen Spatial Brainstorming with AI
-- Radius Intuitive Dream Job Finder
-- Geometry Nodes Lab
+## 🛠️ Elite Tech Stack
 
-## 💼 Professional Background
+My toolkit includes industry-standard technologies and "Google-scale" engineering practices:
 
-Includes an experience timeline featuring:
+### Core Engineering
 
-- Current role as Final Year BE Student with AI/ML specialization
-- Past experience as AI Research Assistant
-- Work as a Programming Mentor
+- **Frontend**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Python, Go (Golang), Rust
+- **Database**: PostgreSQL, CockroachDB, Cassandra
+- **Infrastructure**: Kubernetes, Terraform, Docker
 
-## 🛠️ Tech Stack
+### Salesforce Ecosystem
 
-- **Framework**: Next.js 15 with App Router
-- **UI Library**: React 19
-- **Styling**: Tailwind CSS with custom configuration
-- **Animations**: Framer Motion
-- **Icons**: React Icons
-- **State Management**: React Context API
-- **Smooth Scrolling**: Locomotive Scroll
-- **Salesforce**: Apex, LWC, Admin
-- **Development Tools**: ESLint, PostCSS
+- **Development**: Apex, Lightning Web Components (LWC), SOQL/SOSL
+- **Administration**: Security, Automation (Flows), Data Management
+
+### Design & Creative
+
+- **Tools**: Figma, Adobe Creative Suite
+- **Libraries**: Framer Motion, Locomotive Scroll, Three.js
+
+---
+
+## ✨ Portfolio Features
+
+This portfolio is a testament to my engineering and design skills, featuring:
+
+- **Premium Aesthetics**: "KPRVerse" inspired Ink Effect Preloader and luxury typography (Bodoni Moda).
+- **Performance First**: Optimized with Next.js 15, Turbopack, and dynamic sitemap generation.
+- **Interactive Experience**: Custom magnetic cursor, smooth scrolling, and staggered animations.
+- **SEO Optimized**: JSON-LD structured data, dynamic metadata, and semantic HTML.
+
+---
 
 ## 📁 Project Structure
 
-```
+```bash
 portfolio/
 ├── app/
-│   ├── components/     # Reusable UI components
-│   ├── context/       # React Context providers
-│   ├── about/         # About page components
-│   ├── globals.css    # Global styles
-│   ├── layout.js      # Root layout component
-│   └── page.js        # Home page component
-├── public/            # Static assets
-└── ...config files    # Various configuration files
+│   ├── components/     # Reusable UI components (Navbar, Preloader, Skills, etc.)
+│   ├── data/          # Centralized content and project data
+│   ├── about/         # About page
+│   ├── work/          # Project detail pages (Dynamic Routes)
+│   ├── globals.css    # Global styles & Tailwind directives
+│   ├── layout.tsx     # Root layout with SEO & Font configuration
+│   └── page.tsx       # Home page
+├── public/            # Static assets (Images, Icons)
+└── ...config files    # Next.js, Tailwind, ESLint configs
 ```
+
+---
 
 ## 🚀 Getting Started
 
@@ -90,74 +108,18 @@ portfolio/
 
 4. **Open [http://localhost:3000](http://localhost:3000) in your browser**
 
-## 🔧 Available Scripts
+---
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
+## 🤝 Connect
 
-## 🎨 Customization
-
-### Theme Configuration
-
-The project uses a custom color scheme defined in `tailwind.config.mjs`:
-
-```js
-colors: {
-  cream: { /* Light mode palette */ },
-  midnight: { /* Dark mode palette */ },
-  accent: { /* Highlight colors */ }
-}
-```
-
-### Typography
-
-The project uses a custom typography system:
-
-- **Neue Haas Display** - For headings
-- **Neue Montreal** - For body text
-- **JetBrains Mono** - For code snippets
-
-## 📱 Responsive Breakpoints
-
-- Mobile: 320px - 767px
-- Tablet: 768px - 1199px
-- Desktop: 1200px+
-- Large Display: 1440px+
-
-## 🔍 Performance Optimizations
-
-- Next.js Image component for optimized images
-- Dynamic imports with loading states
-- Custom CSS utilities for better performance
-- Metadata optimization for SEO
-- Social media embed support
-
-## 📦 Dependencies
-
-### Core Dependencies
-
-- next: 15.1.7
-- react: ^19.0.0
-- react-dom: ^19.0.0
-- framer-motion: ^12.4.3
-- locomotive-scroll: ^4.1.4
-- react-icons: ^5.4.0
-
-### Development Dependencies
-
-- tailwindcss: ^3.4.1
-- postcss: ^8
-- eslint: ^9
-- @eslint/eslintrc: ^3
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **LinkedIn**: [Rudradev Myadara](https://www.linkedin.com/in/rudradev-myadara)
+- **GitHub**: [Rudra-Dev05](https://github.com/Rudra-Dev05)
+- **Twitter**: [@rudra_dev05](https://twitter.com/rudra_dev05)
+- **Email**: [myadararudradev@gmail.com](mailto:myadararudradev@gmail.com)
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/Rudra-Dev05">Rudra-Dev05</a></p>
+  <p>Built with ❤️ and ☕ by <strong>Rudradev Myadara</strong></p>
+  <p>© 2025 Rudradev Myadara. All rights reserved.</p>
 </div>
