@@ -1,14 +1,15 @@
 import { MetadataRoute } from 'next'
+import { projects } from './data/projects'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://rudradev.com' // Replace with actual domain
+  const baseUrl = 'https://rudradev.com'
 
-  // You can add dynamic routes here by fetching data from your CMS/database
-  // const projects = await getProjects()
-  // const projectUrls = projects.map(project => ({
-  //   url: `${baseUrl}/work/${project.slug}`,
-  //   lastModified: new Date(project.updatedAt),
-  // }))
+  const projectUrls = projects.map((project) => ({
+    url: `${baseUrl}/work/${project.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
 
   return [
     {
@@ -17,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1,
     },
-    // ...projectUrls,
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    ...projectUrls,
   ]
 }
