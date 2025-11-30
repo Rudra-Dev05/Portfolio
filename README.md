@@ -26,6 +26,7 @@
 ## 🚀 Projects Showcase
 
 The portfolio highlights notable projects including:
+
 - Red Bull TV for visionOS Immersive Media
 - SixD SwiftUI & Interaction Design
 - Oxygen Spatial Brainstorming with AI
@@ -35,6 +36,7 @@ The portfolio highlights notable projects including:
 ## 💼 Professional Background
 
 Includes an experience timeline featuring:
+
 - Current role as Final Year BE Student with AI/ML specialization
 - Past experience as AI Research Assistant
 - Work as a Programming Mentor
@@ -48,6 +50,7 @@ Includes an experience timeline featuring:
 - **Icons**: React Icons
 - **State Management**: React Context API
 - **Smooth Scrolling**: Locomotive Scroll
+- **Salesforce**: Apex, LWC, Admin
 - **Development Tools**: ESLint, PostCSS
 
 ## 📁 Project Structure
@@ -68,16 +71,19 @@ portfolio/
 ## 🚀 Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Rudra-Dev05/Portfolio.git
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Run the development server**
+
    ```bash
    npm run dev
    ```
@@ -108,6 +114,7 @@ colors: {
 ### Typography
 
 The project uses a custom typography system:
+
 - **Neue Haas Display** - For headings
 - **Neue Montreal** - For body text
 - **JetBrains Mono** - For code snippets
@@ -130,6 +137,7 @@ The project uses a custom typography system:
 ## 📦 Dependencies
 
 ### Core Dependencies
+
 - next: 15.1.7
 - react: ^19.0.0
 - react-dom: ^19.0.0
@@ -138,6 +146,7 @@ The project uses a custom typography system:
 - react-icons: ^5.4.0
 
 ### Development Dependencies
+
 - tailwindcss: ^3.4.1
 - postcss: ^8
 - eslint: ^9

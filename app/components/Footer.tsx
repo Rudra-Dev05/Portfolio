@@ -2,22 +2,12 @@
 import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
-import { useCursorHandlers } from '../context/CursorContext'
+import { footerLinks } from '../data/content'
 
 const Footer = () => {
   const { isDarkMode } = useTheme()
-  const footerRef = useRef(null)
+  const footerRef = useRef<HTMLElement>(null)
   const isInView = useInView(footerRef, { once: true, margin: "-10% 0px" })
-  const linkHandlers = useCursorHandlers('link')
-  
-  // Simple links - exactly like Haolun Yang's site
-  const footerLinks = [
-    { label: "Email", href: "mailto:myadararudradev@gmail.com" },
-    { label: "Resume", href: "https://drive.google.com/file/d/13oN1fousZwZPAe11iz_fNYWDTQDlnno_/view?usp=sharing" },
-    { label: "X/Twitter", href: "https://x.com/RMyadara" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/rudradev-myadara/" },
-    { label: "GitHub", href: "https://github.com/Rudra-Dev05" },
-  ]
   
   return (
     <footer 
@@ -45,7 +35,6 @@ const Footer = () => {
                 href={link.href}
                 label={link.label}
                 isDarkMode={isDarkMode}
-                linkHandlers={linkHandlers}
               />
             ))}
           </div>
@@ -55,7 +44,13 @@ const Footer = () => {
   )
 }
 
-const FooterLink = ({ href, label, isDarkMode, linkHandlers }) => {
+interface FooterLinkProps {
+  href: string
+  label: string
+  isDarkMode: boolean
+}
+
+const FooterLink = ({ href, label, isDarkMode }: FooterLinkProps) => {
   return (
     <motion.a 
       href={href} 
@@ -69,7 +64,6 @@ const FooterLink = ({ href, label, isDarkMode, linkHandlers }) => {
           : '0 0 10px 1px rgba(0, 0, 0, 0.05)' 
       }}
       whileTap={{ scale: 0.98 }}
-      {...linkHandlers}
     >
       {label}
     </motion.a>

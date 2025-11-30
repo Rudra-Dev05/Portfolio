@@ -4,12 +4,14 @@ import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import Link from 'next/link'
 import Image from 'next/image'
+import Skills from '../components/Skills'
+import { personalInfo } from '../data/content'
 
 export default function About() {
   const { isDarkMode } = useTheme()
   
   useEffect(() => {
-    document.title = 'About | Rudradev Myadara'
+    document.title = `About | ${personalInfo.name}`
   }, [])
   
   return (
@@ -29,7 +31,7 @@ export default function About() {
               </h1>
               
               <h2 className="text-xl md:text-2xl lg:text-3xl font-normal max-w-3xl leading-relaxed text-black/80">
-                I&apos;m Rudradev! Currently a Full Stack Developer & AI Engineer, I&apos;m a problem solver with a passion for creating intuitive digital experiences that blend technology with thoughtful design.
+                {personalInfo.bio.long}
               </h2>
             </div>
             
@@ -45,6 +47,7 @@ export default function About() {
                   src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=2812&auto=format&fit=crop"
                   alt="Coding on laptop"
                   fill
+                  sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -59,6 +62,7 @@ export default function About() {
                   src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1887&auto=format&fit=crop"
                   alt="AI visualization"
                   fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -73,6 +77,7 @@ export default function About() {
                   src="https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?q=80&w=1839&auto=format&fit=crop"
                   alt="Design work"
                   fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -87,6 +92,7 @@ export default function About() {
                   src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=1932&auto=format&fit=crop"
                   alt="Workspace setup"
                   fill
+                  sizes="(max-width: 768px) 100vw, 66vw"
                   className="object-cover"
                 />
               </motion.div>
@@ -117,33 +123,7 @@ export default function About() {
                 My skills & experience
               </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16">
-                <div>
-                  <h3 className="text-xl md:text-2xl font-medium mb-6 text-black">
-                    Development
-                  </h3>
-                  <ul className="space-y-3 text-lg text-black/80">
-                    <li>React & Next.js</li>
-                    <li>Node.js & Express</li>
-                    <li>Python & Django</li>
-                    <li>MongoDB & PostgreSQL</li>
-                    <li>TensorFlow & PyTorch</li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl md:text-2xl font-medium mb-6 text-black">
-                    Design
-                  </h3>
-                  <ul className="space-y-3 text-lg text-black/80">
-                    <li>User Experience Design</li>
-                    <li>User Interface Design</li>
-                    <li>Interaction Design</li>
-                    <li>Figma & Adobe Creative Suite</li>
-                    <li>Design Systems</li>
-                  </ul>
-                </div>
-              </div>
+              <Skills />
             </div>
             
             {/* Current status section */}
@@ -160,7 +140,7 @@ export default function About() {
                 <li>• Working on AI-powered applications that make complex data accessible and actionable</li>
                 <li>• Exploring new interaction patterns for web interfaces using Framer Motion</li>
                 <li>• Learning more about 3D visualization techniques with Three.js</li>
-                <li>• Based in Hyderabad, India, but working with clients globally</li>
+                <li>• Based in {personalInfo.location}, but working with clients globally</li>
               </ul>
             </div>
           </motion.div>
@@ -168,4 +148,4 @@ export default function About() {
       </section>
     </main>
   )
-} 
+}

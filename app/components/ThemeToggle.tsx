@@ -2,12 +2,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
-import { useCursorHandlers } from '../context/CursorContext'
+
 import { HiSun, HiMoon } from 'react-icons/hi'
 
-const ThemeToggle = () => {
+const ThemeToggle: React.FC = () => {
   const { isDarkMode, toggleTheme } = useTheme()
-  const buttonHandlers = useCursorHandlers('button')
+
   
   return (
     <motion.button
@@ -19,7 +19,7 @@ const ThemeToggle = () => {
       } transition-colors`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      {...buttonHandlers}
+
       aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <motion.div
@@ -51,4 +51,4 @@ const ThemeToggle = () => {
   )
 }
 
-export default ThemeToggle 
+export default ThemeToggle

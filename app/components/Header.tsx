@@ -2,14 +2,14 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
-import { useCursorHandlers } from '../context/CursorContext'
+import { personalInfo } from '../data/content'
+
 import Link from 'next/link'
 
 const Header = () => {
   const { isDarkMode } = useTheme()
-  const headerRef = useRef(null)
-  const buttonHandlers = useCursorHandlers('button')
-  const linkHandlers = useCursorHandlers('link')
+  const headerRef = useRef<HTMLElement>(null)
+
   const [isLoaded, setIsLoaded] = useState(false)
   
   // Trigger animations after initial load
@@ -31,12 +31,17 @@ const Header = () => {
   const scale = useTransform(scrollYProgress, [0, 0.25], [1, 0.98])
   const textY = useTransform(scrollYProgress, [0, 0.3], [0, -30])
   
-  // Professional titles with more variety
+  // Professional titles from centralized data
   const statementLines = [
-    "AI Engineer",
-    "ML Developer",
-    "Creative Technologist"
+    personalInfo.role,
+    personalInfo.specialization,
+    "Full Stack Engineer"
   ]
+  
+  // Split name for display
+  const nameParts = personalInfo.name.split(' ')
+  const firstName = nameParts[0]
+  const lastName = nameParts.slice(1).join(' ')
   
   return (
     <section 
@@ -58,8 +63,8 @@ const Header = () => {
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, delay: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
                   >
-                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-dmSerif text-black dark:text-white leading-[0.85] tracking-tight">
-                      <span className="block">Rudradev</span>
+                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-bodoni text-black dark:text-white leading-[0.85] tracking-tight">
+                      <span className="block">{firstName}</span>
                     </h1>
                   </motion.div>
                 </div>
@@ -70,8 +75,8 @@ const Header = () => {
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, delay: 0.65, ease: [0.165, 0.84, 0.44, 1] }}
                   >
-                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-dmSerif italic text-black/75 dark:text-white/75 leading-[0.85] tracking-tight">
-                      <span className="block">Myadara</span>
+                    <h1 className="text-5xl sm:text-7xl md:text-[90px] lg:text-[130px] xl:text-[150px] font-bodoni italic text-black/75 dark:text-white/75 leading-[0.85] tracking-tight">
+                      <span className="block">{lastName}</span>
                     </h1>
                   </motion.div>
                 </div>
@@ -112,7 +117,7 @@ const Header = () => {
                           }}
                           className={`absolute inset-0 flex items-center ${index !== 0 ? 'opacity-0' : ''}`}
                         >
-                          <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium font-playfair italic text-black/90 dark:text-white/90">{line}</span>
+                          <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium font-bodoni italic text-black/90 dark:text-white/90">{line}</span>
                         </motion.div>
                       ))}
                     </div>
@@ -140,9 +145,7 @@ const Header = () => {
                     transition={{ duration: 0.8, delay: 0.9, ease: [0.165, 0.84, 0.44, 1] }}
                     className="text-base sm:text-lg md:text-xl text-black/70 dark:text-white/70 font-grotesk leading-relaxed pb-4 sm:pb-6 pl-4 sm:pl-5 border-l-[2px] border-black/15 dark:border-white/15"
                   >
-                    I create intelligent systems and immersive experiences that bridge the gap between 
-                    technology and creativity, focusing on AI innovation, machine learning solutions, and
-                    human-centered design.
+                    {personalInfo.bio.tagline} {personalInfo.bio.short}
                   </motion.p>
                   
                   {/* CTA buttons with refined glass morphism */}
@@ -154,7 +157,7 @@ const Header = () => {
                   >
                     <Link href="#work" className="group w-full sm:w-auto">
                       <motion.button
-                        {...buttonHandlers}
+
                         className="w-full glass-light dark:glass-dark backdrop-blur-md px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded shadow-sm"
                         whileHover={{ 
                           scale: 1.03,
@@ -173,7 +176,7 @@ const Header = () => {
                     
                     <Link href="#contact" className="group w-full sm:w-auto">
                       <motion.button
-                        {...buttonHandlers}
+
                         className="w-full px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded"
                         whileHover={{ 
                           scale: 1.03,
@@ -202,7 +205,7 @@ const Header = () => {
                 nextSection.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            {...buttonHandlers}
+
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

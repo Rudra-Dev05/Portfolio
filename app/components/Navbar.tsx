@@ -4,71 +4,39 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
-import { useCursorHandlers } from '../context/CursorContext'
+
 import { HiX } from 'react-icons/hi'
 import { RiMenu4Line } from 'react-icons/ri'
+import { useScrollContext } from '../context/ScrollContext'
 
-// Enhanced page transition wrapper inspired by Acts of Imagination
-export const PageTransition = ({ children }) => {
+// Simplified page transition
+export const PageTransition = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={usePathname()}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -20, opacity: 0 }}
-          transition={{
-            type: "tween",
-            ease: [0.22, 1, 0.36, 1],
-            duration: 0.8
-          }}
-          className="w-full"
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
-      
-      {/* Page transition overlay - inspired by AOI */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={usePathname() + "-overlay"}
-          className="fixed inset-0 z-[100] pointer-events-none bg-black"
-          initial={{ scaleY: 0, opacity: 1 }}
-          animate={{ 
-            scaleY: [1, 0],
-            opacity: 1,
-            transformOrigin: ["top", "bottom"]
-          }}
-          exit={{ 
-            scaleY: [0, 1],
-            opacity: 1,
-            transformOrigin: ["top", "bottom"]
-          }}
-          transition={{
-            duration: 1,
-            ease: [0.76, 0, 0.24, 1]
-          }}
-        />
-      </AnimatePresence>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full"
+    >
+      {children}
+    </motion.div>
   );
 };
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hoveredLink, setHoveredLink] = useState(null)
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
   const [isLogoHovered, setIsLogoHovered] = useState(false)
   const [hashValue, setHashValue] = useState('')
   const [isMounted, setIsMounted] = useState(false)
   const { isDarkMode, toggleTheme } = useTheme()
   const pathname = usePathname()
   const router = useRouter()
-  const buttonHandlers = useCursorHandlers('button')
-  const linkHandlers = useCursorHandlers('link')
-  const navRef = useRef(null)
-  const pillNavRef = useRef(null)
+
+  const navRef = useRef<HTMLDivElement>(null)
+  const pillNavRef = useRef<HTMLDivElement>(null)
   
   // Client-side only operations
   useEffect(() => {
@@ -114,7 +82,9 @@ const Navbar = () => {
   }, [])
   
   // Implement smooth scrolling
-  const scrollToSection = (e, href) => {
+  const { scrollTo } = useScrollContext()
+  
+  const scrollToSection = (e: React.MouseEvent, href: string) => {
     e.preventDefault()
     
     // Close mobile menu if open
@@ -126,56 +96,22 @@ const Navbar = () => {
       
       // For #work link, always navigate to home page first if not already there
       if (sectionId === 'work' && pathname !== '/') {
-        router.push('/');
-        // Wait for navigation to complete before scrolling
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            window.scrollTo({
-              top: element.offsetTop - 100,
-              behavior: 'smooth'
-            });
-          }
-        }, 300);
+        router.push('/?scrollTo=work');
         return;
       }
       
       // Stay on current page for footer links regardless of current page
       if (sectionId === 'footer') {
-        // Find the footer element
-        const footerElement = document.getElementById('footer')
-        if (footerElement) {
-          window.scrollTo({
-            top: footerElement.offsetTop - 100,
-            behavior: 'smooth'
-          })
-          return
-        }
+        scrollTo('#footer', { offset: -100 })
+        return
       }
       
-      const element = document.getElementById(sectionId)
-      
-      if (element) {
-        // If we're not on the home page and this isn't a footer link, navigate first then scroll
-        if (pathname !== '/' && sectionId !== 'footer') {
-          router.push('/')
-          // Wait for navigation to complete
-          setTimeout(() => {
-            const newElement = document.getElementById(sectionId)
-            if (newElement) {
-              window.scrollTo({
-                top: newElement.offsetTop - 100, // Offset for navbar
-                behavior: 'smooth'
-              })
-            }
-          }, 300)
-        } else {
-          // Smooth scroll on current page
-          window.scrollTo({
-            top: element.offsetTop - 100, // Offset for navbar
-            behavior: 'smooth'
-          })
-        }
+      // If we're not on the home page and this isn't a footer link, navigate first then scroll
+      if (pathname !== '/' && sectionId !== 'footer') {
+        router.push(`/?scrollTo=${sectionId}`)
+      } else {
+        // Smooth scroll on current page
+        scrollTo(`#${sectionId}`, { offset: -100 })
       }
     } else {
       // Regular navigation
@@ -183,42 +119,36 @@ const Navbar = () => {
     }
   }
   
-  // Check if a link is active - safely for SSR
-  const isActive = (href) => {
-    if (!isMounted) return false;
-    
-    if (href === '/') {
-      return pathname === '/'
-    }
-    
-    if (href.startsWith('#')) {
-      // For '#footer' link, special handling
-      if (href === '#footer') {
-        if (typeof window !== 'undefined') {
-          // Consider active if we're near the bottom of the page
-          const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
-          return isNearBottom
-        }
-        return false
-      }
-      
-      // For '#work' link, only active on home page with #work hash
-      if (href === '#work') {
-        return pathname === '/' && hashValue === '#work'
-      }
-      
-      return false
-    }
-    
-    return pathname.startsWith(href)
-  }
-  
-  // Navigation links - removed Home as requested
+  // Navigation links
   const navLinks = [
     { href: '#work', label: 'Projects' },
     { href: '/about', label: 'Craft' },
     { href: '#footer', label: 'Connect', noHover: true },
   ]
+
+  // Determine the single active link
+  const getActiveHref = () => {
+    if (!isMounted) return null;
+
+    // 1. Check for hash matches on home page
+    if (pathname === '/' && hashValue === '#work') {
+      return '#work'
+    }
+
+    // 2. Check for page routes
+    if (pathname === '/about') {
+      return '/about'
+    }
+    
+    // 3. Default to projects on home page if no other hash
+    if (pathname === '/' && !hashValue) {
+      return '#work'
+    }
+
+    return null
+  }
+
+  const activeHref = getActiveHref()
   
   return (
     <motion.header 
@@ -243,7 +173,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                {...buttonHandlers}
+
               >
                 <div className="w-3 h-3 md:w-3 md:h-3 bg-black dark:bg-white rounded-full"></div>
               </motion.div>
@@ -299,7 +229,7 @@ const Navbar = () => {
               `}
             >
               {navLinks.map(({ href, label, noHover }, index) => {
-                const active = isActive(href);
+                const active = activeHref === href;
                 return (
                   <motion.div
                     key={href}
@@ -317,9 +247,16 @@ const Navbar = () => {
                             ? 'text-black/80 dark:text-white/80' 
                             : 'text-black/80 dark:text-white/80 hover:opacity-80'
                       } rounded-full font-medium font-unbounded inline-block`}
-                      onMouseEnter={() => !noHover && setHoveredLink(href)}
-                      onMouseLeave={() => !noHover && setHoveredLink(null)}
-                      {...(noHover ? {} : linkHandlers)}
+                      onMouseEnter={() => {
+                        if (!noHover) {
+                          setHoveredLink(href);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (!noHover) {
+                          setHoveredLink(null);
+                        }
+                      }}
                     >
                       <span className="relative z-10">{label}</span>
                       
@@ -372,7 +309,7 @@ const Navbar = () => {
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              {...buttonHandlers}
+
             >
               <span className="sr-only">{isMobileMenuOpen ? "Close menu" : "Open menu"}</span>
               {isMobileMenuOpen ? (
@@ -412,7 +349,7 @@ const Navbar = () => {
             
             <div className="flex flex-col h-full justify-center items-center p-6 sm:p-10">
               {navLinks.map(({ href, label }, index) => {
-                const active = isActive(href);
+                const active = activeHref === href;
                 return (
                   <motion.div
                     key={href}
