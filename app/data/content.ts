@@ -14,7 +14,7 @@ export const personalInfo = {
     linkedin: "https://www.linkedin.com/in/rudradev-myadara/",
     github: "https://github.com/Rudra-Dev05",
     twitter: "https://x.com/RMyadara",
-    resume: "https://drive.google.com/file/d/13oN1fousZwZPAe11iz_fNYWDTQDlnno_/view?usp=sharing"
+    resume: "https://drive.google.com/file/d/1ek7OjmQDUsruv1whmVu8hyQb7hVUCZP0/view?usp=sharing"
   },
   bio: {
     short: "System Engineer at Infosys & Salesforce Developer. I code for fun.",

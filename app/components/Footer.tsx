@@ -54,9 +54,9 @@ const FooterLink = ({ href, label, isDarkMode }: FooterLinkProps) => {
   return (
     <motion.a 
       href={href} 
-      target={href.startsWith('mailto:') || href.startsWith('/') ? undefined : "_blank"}
-      rel={href.startsWith('mailto:') || href.startsWith('/') ? undefined : "noopener noreferrer"}
-      className="text-base tracking-wide text-black/80 dark:text-white/80 relative overflow-hidden group font-medium font-grotesk glass-light dark:glass-dark backdrop-blur-sm px-5 py-2 rounded-full flex items-center transition-all duration-300"
+      target={href.startsWith('mailto:') ? undefined : "_blank"}
+      rel={href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
+      className="text-base tracking-wide text-black/80 dark:text-white/80 relative overflow-hidden group font-medium font-grotesk glass-light dark:glass-dark backdrop-blur-sm px-5 py-2 rounded-full flex items-center transition-all duration-300 cursor-pointer"
       whileHover={{ 
         scale: 1.03,
         boxShadow: isDarkMode 
