@@ -32,7 +32,7 @@ export const navigation = [
 export const footerLinks = [
   { label: "Email", href: `mailto:${personalInfo.email}` },
   { label: "Resume", href: personalInfo.social.resume },
-  { label: "X/Twitter", href: personalInfo.social.twitter },
+
   { label: "LinkedIn", href: personalInfo.social.linkedin },
   { label: "GitHub", href: personalInfo.social.github }
 ]
