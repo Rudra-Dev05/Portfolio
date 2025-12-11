@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTheme } from '../context/ThemeContext'
+import { FaReact, FaPython, FaNodeJs } from 'react-icons/fa'
+import { SiNextdotjs, SiTypescript, SiTailwindcss, SiSupabase, SiTensorflow, SiFastapi, SiThreedotjs } from 'react-icons/si'
 
 import { projects, Project } from '../data/projects'
 
@@ -57,6 +59,22 @@ const Work = () => {
       </div>
     </section>
   )
+}
+
+// Icon mapping helper
+const getTechIcon = (tech: string) => {
+  switch (tech) {
+    case 'React': return <FaReact className="w-5 h-5" />
+    case 'Next.js': return <SiNextdotjs className="w-5 h-5" />
+    case 'TypeScript': return <SiTypescript className="w-5 h-5" />
+    case 'Tailwind CSS': return <SiTailwindcss className="w-5 h-5" />
+    case 'Supabase': return <SiSupabase className="w-5 h-5" />
+    case 'Python': return <FaPython className="w-5 h-5" />
+    case 'TensorFlow': return <SiTensorflow className="w-5 h-5" />
+    case 'FastAPI': return <SiFastapi className="w-5 h-5" />
+    case 'Three.js': return <SiThreedotjs className="w-5 h-5" />
+    default: return null
+  }
 }
 
 interface ProjectCardProps {
@@ -120,17 +138,34 @@ const ProjectCard = ({ project, index, isHeadingInView }: ProjectCardProps) => {
               </h3>
             </div>
             
-            <div className="mt-6 overflow-hidden">
+            <div className="mt-8 flex flex-wrap gap-4">
+              {project.techStack.map((tech) => (
+                <div key={tech} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-sm font-medium text-black/80 dark:text-white/80">
+                  {getTechIcon(tech)}
+                  <span>{tech}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-8 overflow-hidden">
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={isHovered ? { x: 0, opacity: 1 } : { x: -20, opacity: 0 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-center gap-2 text-black dark:text-white font-medium"
+                className="flex items-center gap-2 text-black dark:text-white font-medium group-hover:underline decoration-1 underline-offset-4"
               >
                 <span>View Project</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <motion.svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  animate={{ x: isHovered ? 5 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                </motion.svg>
               </motion.div>
             </div>
           </div>

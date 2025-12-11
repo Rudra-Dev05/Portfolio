@@ -143,6 +143,35 @@ export default function About() {
                 <li>• Based in {personalInfo.location}, but working with clients globally</li>
               </ul>
             </div>
+
+             {/* Proof of Work - GitHub Graph */}
+             <div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight mb-8 text-black">
+                Proof of Work
+              </h2>
+              <div className="w-full overflow-hidden rounded-xl border border-black/10 bg-white p-4 md:p-8">
+                <p className="text-lg text-black/60 mb-6">
+                  Consistency is key. Here's my open source activity over the last year.
+                </p>
+                <div className="w-full overflow-x-auto">
+                    <img 
+                      src="https://ghchart.rshah.org/000000/Rudra-Dev05" 
+                      alt="Rudra-Dev05's Github chart" 
+                      className="min-w-[800px] w-full"
+                    />
+                </div>
+                <div className="mt-4 flex justify-end">
+                  <a 
+                    href="https://github.com/Rudra-Dev05" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-black hover:underline"
+                  >
+                    View my GitHub profile &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>

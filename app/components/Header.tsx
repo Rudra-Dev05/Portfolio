@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import { personalInfo } from '../data/content'
+import Magnetic from './Magnetic'
 
 import Link from 'next/link'
 
@@ -33,9 +34,7 @@ const Header = () => {
   
   // Professional titles from centralized data
   const statementLines = [
-    personalInfo.role,
-    personalInfo.specialization,
-    "Full Stack Engineer"
+    "System Engineer @ Infosys"
   ]
   
   // Split name for display
@@ -156,38 +155,42 @@ const Header = () => {
                     className="flex flex-col sm:flex-row gap-4 mt-6 sm:mt-auto"
                   >
                     <Link href="#work" className="group w-full sm:w-auto">
-                      <motion.button
+                      <Magnetic>
+                        <motion.button
 
-                        className="w-full glass-light dark:glass-dark backdrop-blur-md px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded shadow-sm"
-                        whileHover={{ 
-                          scale: 1.03,
-                          boxShadow: isDarkMode 
-                            ? '0 0 15px 2px rgba(255, 255, 255, 0.1)' 
-                            : '0 0 15px 2px rgba(0, 0, 0, 0.05)' 
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        View my work
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </motion.button>
+                          className="w-full glass-light dark:glass-dark backdrop-blur-md px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded shadow-sm"
+                          whileHover={{ 
+                            scale: 1.03,
+                            boxShadow: isDarkMode 
+                              ? '0 0 15px 2px rgba(255, 255, 255, 0.1)' 
+                              : '0 0 15px 2px rgba(0, 0, 0, 0.05)' 
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          View my work
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </motion.button>
+                      </Magnetic>
                     </Link>
                     
                     <Link href="#contact" className="group w-full sm:w-auto">
-                      <motion.button
+                      <Magnetic>
+                        <motion.button
 
-                        className="w-full px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded"
-                        whileHover={{ 
-                          scale: 1.03,
-                          boxShadow: isDarkMode 
-                            ? '0 0 15px 2px rgba(255, 255, 255, 0.05)' 
-                            : '0 0 15px 2px rgba(0, 0, 0, 0.02)' 
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        Contact me
-                      </motion.button>
+                          className="w-full px-6 py-3 sm:px-7 sm:py-4 text-sm sm:text-base rounded-full border border-black/20 dark:border-white/20 bg-transparent text-black dark:text-white font-medium transition-all duration-300 hover:scale-105 transform-gpu flex items-center justify-center sm:justify-start gap-2 font-unbounded"
+                          whileHover={{ 
+                            scale: 1.03,
+                            boxShadow: isDarkMode 
+                              ? '0 0 15px 2px rgba(255, 255, 255, 0.05)' 
+                              : '0 0 15px 2px rgba(0, 0, 0, 0.02)' 
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          Contact me
+                        </motion.button>
+                      </Magnetic>
                     </Link>
                   </motion.div>
                 </div>
